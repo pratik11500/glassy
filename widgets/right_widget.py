@@ -10,6 +10,8 @@ from common import MARGIN, get_scale, get_workarea, place
 S = get_scale()
 TITLE = "GlassyRight"
 RED = (1.0, 0.27, 0.4)
+GREEN = (0.0, 1.0, 0.6)
+VIOLET = (0.66, 0.47, 1.0)
 
 
 def px(n):
@@ -148,14 +150,14 @@ class GlassWidget(Gtk.Window):
         cx = w // 2
         if batt is None:
             # Desktop PC: no battery, so show a "plugged in" ring
-            last = (cx, px(315), 100, RED, "AC", True)
+            last = (cx, px(315), 100, GREEN, "AC", True)
         else:
             pct, plugged = batt
             label = "CHG" if (plugged and pct < 100) else "BAT"
-            last = (cx, px(315), pct, RED, label, False)
+            last = (cx, px(315), pct, GREEN if plugged else RED, label, False)
         items = [
             (cx, px(45),  cpu,  (0.0, 0.8, 1.0),  "CPU", False),
-            (cx, px(135), ram,  (0.0, 1.0, 0.6),  "RAM", False),
+            (cx, px(135), ram,  VIOLET,  "RAM", False),
             (cx, px(225), disk, (1.0, 0.6, 0.0),  "DISK", False),
             last,
         ]
